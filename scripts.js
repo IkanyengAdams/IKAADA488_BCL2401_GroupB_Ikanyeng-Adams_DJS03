@@ -1,5 +1,5 @@
 import { books, authors, genres, BOOKS_PER_PAGE } from "./data.js";
-
+// Global variables
 let page = 1;
 let matches = books;
 
@@ -31,7 +31,10 @@ function renderBookPreviews() {
 }
 renderBookPreviews();
 
-const genreHtml = document.createDocumentFragment();
+// Function to create HTML fragments for genres or authors
+
+function createOptionsFragment() {
+    const genreHtml = document.createDocumentFragment();
 const firstGenreElement = document.createElement("option");
 firstGenreElement.value = "any";
 firstGenreElement.innerText = "All Genres";
@@ -45,6 +48,10 @@ for (const [id, name] of Object.entries(genres)) {
 }
 
 document.querySelector("[data-search-genres]").appendChild(genreHtml);
+}
+
+createOptionsFragment();
+
 
 const authorsHtml = document.createDocumentFragment();
 const firstAuthorElement = document.createElement("option");
@@ -89,6 +96,7 @@ document.querySelector("[data-list-button]").innerHTML = `
     })</span>
 `;
 
+// Event Listerners
 document.querySelector("[data-search-cancel]").addEventListener("click", () => {
   document.querySelector("[data-search-overlay]").open = false;
 });
