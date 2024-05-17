@@ -1,4 +1,5 @@
 import { books, authors, genres, BOOKS_PER_PAGE } from "./data.js";
+
 // Global variables
 let page = 1;
 let matches = books;
@@ -32,8 +33,7 @@ function renderBookPreviews() {
 renderBookPreviews();
 
 // Function to create HTML fragments for genres or authors
-
-function createOptionsFragment() {
+function populateDropDownOptions() {
     const genreHtml = document.createDocumentFragment();
 const firstGenreElement = document.createElement("option");
 firstGenreElement.value = "any";
@@ -48,10 +48,6 @@ for (const [id, name] of Object.entries(genres)) {
 }
 
 document.querySelector("[data-search-genres]").appendChild(genreHtml);
-}
-
-createOptionsFragment();
-
 
 const authorsHtml = document.createDocumentFragment();
 const firstAuthorElement = document.createElement("option");
@@ -67,34 +63,44 @@ for (const [id, name] of Object.entries(authors)) {
 }
 
 document.querySelector("[data-search-authors]").appendChild(authorsHtml);
-
-if (
-  window.matchMedia &&
-  window.matchMedia("(prefers-color-scheme: dark)").matches
-) {
-  document.querySelector("[data-settings-theme]").value = "night";
-  document.documentElement.style.setProperty("--color-dark", "255, 255, 255");
-  document.documentElement.style.setProperty("--color-light", "10, 10, 20");
-} else {
-  document.querySelector("[data-settings-theme]").value = "day";
-  document.documentElement.style.setProperty("--color-dark", "10, 10, 20");
-  document.documentElement.style.setProperty("--color-light", "255, 255, 255");
 }
 
-document.querySelector("[data-list-button]").innerText = `Show more (${
-  books.length - BOOKS_PER_PAGE
-})`;
-document.querySelector("[data-list-button]").disabled =
-  matches.length - page * BOOKS_PER_PAGE === 0;
+populateDropDownOptions();
 
-document.querySelector("[data-list-button]").innerHTML = `
-    <span>Show more</span>
-    <span class="list__remaining"> (${
-      matches.length - page * BOOKS_PER_PAGE > 0
-        ? matches.length - page * BOOKS_PER_PAGE
-        : 0
-    })</span>
-`;
+
+// Function for color theme
+function colorTheme() {
+    if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        document.querySelector("[data-settings-theme]").value = "night";
+        document.documentElement.style.setProperty("--color-dark", "255, 255, 255");
+        document.documentElement.style.setProperty("--color-light", "10, 10, 20");
+      } else {
+        document.querySelector("[data-settings-theme]").value = "day";
+        document.documentElement.style.setProperty("--color-dark", "10, 10, 20");
+        document.documentElement.style.setProperty("--color-light", "255, 255, 255");
+      }
+      
+      document.querySelector("[data-list-button]").innerText = `Show more (${
+        books.length - BOOKS_PER_PAGE
+      })`;
+      document.querySelector("[data-list-button]").disabled =
+        matches.length - page * BOOKS_PER_PAGE === 0;
+      
+      document.querySelector("[data-list-button]").innerHTML = `
+          <span>Show more</span>
+          <span class="list__remaining"> (${
+            matches.length - page * BOOKS_PER_PAGE > 0
+              ? matches.length - page * BOOKS_PER_PAGE
+              : 0
+          })</span>
+      `;
+}
+
+colorTheme();
+
 
 // Event Listerners
 document.querySelector("[data-search-cancel]").addEventListener("click", () => {
