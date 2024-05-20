@@ -30,7 +30,7 @@ function renderBookPreviews() {
 
   document.querySelector("[data-list-items]").appendChild(starting);
 }
-renderBookPreviews();
+
 
 // Function to create HTML fragments for genres or authors
 function populateDropDownOptions() {
@@ -65,7 +65,7 @@ for (const [id, name] of Object.entries(authors)) {
 document.querySelector("[data-search-authors]").appendChild(authorsHtml);
 }
 
-populateDropDownOptions();
+
 
 
 // Function for color theme: either night or day
@@ -127,7 +127,7 @@ function setColorTheme() {
       `;
 }
 
-setColorTheme();
+
 
 
 // Event Listerners
@@ -160,7 +160,7 @@ function setupEventListeners() {
     document.querySelector("[data-search-form]").addEventListener("submit", handleSearch);
   }
 
-  setupEventListeners();
+  
 
 // Function  to handle the search
   function handleSearch(event) {
@@ -198,7 +198,7 @@ function setupEventListeners() {
       document.querySelector("[data-list-message]").classList.remove("list__message_show");
     }
   
-    renderBooks();
+    
     document.querySelector("[data-search-overlay]").open = false;
   }
 
@@ -224,7 +224,7 @@ function setupEventListeners() {
     }
   
     document.querySelector("[data-list-items]").appendChild(newItems);
-    updateShowMoreButton();
+    
   }
   
   function updateShowMoreButton() {
@@ -260,7 +260,7 @@ function setupEventListeners() {
     document.querySelector("[data-list-items]").appendChild(fragment);
     page += 1;
   
-    updateShowMoreButton();
+   
   }
 
 
@@ -292,6 +292,20 @@ function setupEventListeners() {
       document.querySelector("[data-list-subtitle]").innerText = `${authors[active.author]} (${new Date(active.published).getFullYear()})`;
       document.querySelector("[data-list-description]").innerText = active.description;
     }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    initialize();
+  })
+  
+  function initialize() {
+    renderBookPreviews();
+    populateDropDownOptions();
+    setColorTheme();
+    setupEventListeners();
+    updateShowMoreButton();
+    updateShowMoreButton();
+    renderBooks();
   }
   
   
