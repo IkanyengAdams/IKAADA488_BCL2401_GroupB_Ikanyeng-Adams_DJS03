@@ -31,7 +31,6 @@ function renderBookPreviews() {
   document.querySelector("[data-list-items]").appendChild(starting);
 }
 
-
 // Function to create HTML fragments for genres or authors
 function populateDropDownOptions() {
     const genreHtml = document.createDocumentFragment();
@@ -65,9 +64,6 @@ for (const [id, name] of Object.entries(authors)) {
 document.querySelector("[data-search-authors]").appendChild(authorsHtml);
 }
 
-
-
-
 // Function for color theme: either night or day
 function setColorTheme() {
     document.querySelector("[data-settings-form]")
@@ -94,7 +90,7 @@ function setColorTheme() {
 }
 
 
-    if (theme === "night") {
+if (theme === "night") {
       document.documentElement.style.setProperty(
         "--color-dark",
         "255, 255, 255"
@@ -126,8 +122,6 @@ function setColorTheme() {
           })</span>
       `;
 }
-
-
 
 
 // Event Listerners
@@ -304,8 +298,9 @@ function setupEventListeners() {
     setColorTheme();
     setupEventListeners();
     updateShowMoreButton();
-    updateShowMoreButton();
     renderBooks();
+    updateShowMoreButton();
+    handleShowMore();
   }
   
   
