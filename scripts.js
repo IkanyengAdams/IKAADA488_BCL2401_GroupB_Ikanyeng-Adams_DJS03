@@ -253,7 +253,7 @@ function setupEventListeners() {
   
     document.querySelector("[data-list-items]").appendChild(fragment);
     page += 1;
-  
+    updateShowMoreButton();
    
   }
 
@@ -297,9 +297,7 @@ function setupEventListeners() {
     populateDropDownOptions();
     setColorTheme();
     setupEventListeners();
-    updateShowMoreButton();
     renderBooks();
-    updateShowMoreButton();
     handleShowMore();
   }
   
